@@ -28,7 +28,18 @@ class RadioTest {
         Assertions.assertEquals(expected, actual);
 
     }
+    @Test
+    public void testSetCurrentStationOverLimit() {
+        Radio radio = new Radio(15);
 
+        radio.setCurrentStation(5);
+        radio.setCurrentStation(15);
+        int actual = radio.getCurrentStation();
+        int expected = 5;
+
+        Assertions.assertEquals(expected, actual);
+
+    }
     @Test
     public void testSetCurrentStationBelowZero() {
         Radio radio = new Radio();
@@ -40,7 +51,6 @@ class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
-
     @Test
     public void testNextRegular() {
         Radio radio = new Radio();
@@ -53,7 +63,6 @@ class RadioTest {
         Assertions.assertEquals(expected, actual);
 
     }
-
     @Test
     public void testPrevRegular() {
         Radio radio = new Radio();
@@ -66,7 +75,6 @@ class RadioTest {
         Assertions.assertEquals(expected, actual);
 
     }
-
     @Test
     public void testNextAfterNine() {
         Radio radio = new Radio();
@@ -79,7 +87,18 @@ class RadioTest {
         Assertions.assertEquals(expected, actual);
 
     }
+    @Test
+    public void testNextAfterLimit() {
+        Radio radio = new Radio(15);
 
+        radio.setCurrentStation(14);
+        radio.next();
+        int actual = radio.getCurrentStation();
+        int expected = 0;
+
+        Assertions.assertEquals(expected, actual);
+
+    }
     @Test
     public void testPrevBeforeZero() {
         Radio radio = new Radio();
@@ -92,7 +111,18 @@ class RadioTest {
         Assertions.assertEquals(expected, actual);
 
     }
+    @Test
+    public void testPrevBeforeZero2() {
+        Radio radio = new Radio(15);
 
+        radio.setCurrentStation(0);
+        radio.prev();
+        int actual = radio.getCurrentStation();
+        int expected = 14;
+
+        Assertions.assertEquals(expected, actual);
+
+    }
     @Test
     public void testSetVolumeRegular() {
         Radio radio = new Radio();
